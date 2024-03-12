@@ -6,6 +6,15 @@ import { loadBlogPost } from "@/helpers/file-helpers";
 
 import styles from "./postSlug.module.css";
 
+export async function generateMetadata({ params }) {
+  const post = await loadBlogPost(params.postSlug);
+
+  return {
+    title: post.frontmatter.title,
+    description: post.frontmatter.abstract,
+  };
+}
+
 async function BlogPost({ params }) {
   const post = await loadBlogPost(params.postSlug);
 
